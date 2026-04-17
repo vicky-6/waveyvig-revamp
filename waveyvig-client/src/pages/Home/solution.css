@@ -1,0 +1,138 @@
+/* ================= SECTION ================= */
+.solution-section {
+  background: radial-gradient(circle at 20% 20%, #1f1f5c, #0a0a23);
+  padding: 100px 0;
+}
+
+/* Title */
+.solution-title {
+  color: #e0f7ff;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* ================= CARD WRAPPER ================= */
+.card-wrapper {
+  position: relative;
+  transition: 0.3s ease;
+  width: 100%;
+}
+
+/* Scale other cards slightly (NO fade issue) */
+.solution-section:hover .card-wrapper:not(:hover) {
+  transform: scale(0.96);
+  opacity: 0.7;
+}
+
+/* Active card */
+.card-wrapper:hover {
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+/* ================= CARD ================= */
+.solution-card {
+  position: relative;
+  border-radius: 25px;
+  padding: 25px;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.15); /* FIXED visibility */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* ================= SPOTLIGHT EFFECT ================= */
+.solution-card::before {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.25), transparent 70%);
+  top: var(--y, 50%);
+  left: var(--x, 50%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show spotlight */
+.card-wrapper:hover .solution-card::before {
+  opacity: 1;
+}
+
+/* ================= HOVER ================= */
+.solution-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(0, 188, 212, 0.35);
+}
+
+/* ================= ICON ================= */
+.solution-icon {
+  font-size: 2.5rem;
+  color: #00e5ff;
+  margin-bottom: 15px;
+}
+
+/* ================= TEXT ================= */
+.solution-card-title {
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.solution-card-text {
+  color: #000000;
+  font-size: 0.95rem;
+}
+
+/* ================= LINK ================= */
+.solution-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #00e5ff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.solution-link:hover {
+  transform: translateX(6px);
+  color: #40c4ff;
+
+}
+
+/* FORCE FULL HEIGHT EVERYWHERE */
+.card-wrapper,
+.solution-card,
+.tilt {
+  height: 100%;
+}
+
+/* Make Tilt stretch properly */
+.react-parallax-tilt {
+  height: 100%;
+  width: 100%;
+}
+
+/* Ensure card fills column */
+.solution-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure body fills card */
+.solution-card .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .solution-section {
+    padding: 60px 0;
+  }
+}

@@ -1,0 +1,92 @@
+.auth-box {
+  padding: 40px 30px;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: white;
+  text-align: center;
+  border-radius: 15px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  color: #f87171;
+  transform: scale(1.2);
+}
+
+/* Heading */
+.auth-box h2 {
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* Input wrapper */
+.input-group {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 0 10px;
+}
+
+/* Icons */
+.input-group i {
+  color: #1e3a8a;
+  margin-right: 8px;
+}
+
+/* Input */
+.input-group input {
+  border: none;
+  outline: none;
+  padding: 12px;
+  width: 100%;
+}
+
+/* Button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #1e3a8a;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  background: #e0e7ff;
+  transform: translateY(-2px);
+}
+
+/* Toggle text */
+.auth-box span {
+  color: #fde047;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Modal fix */
+.modal-content {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.modal-body {
+  padding: 0 !important;
+}

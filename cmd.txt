@@ -1,0 +1,21 @@
+Front End: 
+
+1. npm create vite@latest // create vite project
+2. npm install react-bootstrap bootstrap react-router-dom react-icons
+3. npm install bootstrap-icons
+4. npm install styled-components
+5. npm install @react-google-maps/api
+6. npm install react-toastify react-icons
+7. npm install bootstrap-icons
+8. npm install react-toastify
+9. npm install framer-motion
+10. npm instll react-parallax-tilt
+
+
+Back End: 
+1. npm init -y
+2. npm install express mongoose cors dotenv jsonwebtoken
+3. npm install nodemon --save-dev
+4. npm install bcryptjs
+5. npm install axios
+6. npm install multer
