@@ -3,19 +3,13 @@ import { Container, Nav, Navbar, Button, NavDropdown } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import LiveBootCamp from "../pages/LiveBootCamp/LiveBootCamp";
 import AuthModal from "../components/Auth/AuthModal";
-import "./navbar.css";
 
 function WaveyvigTechNavbar() {
   const [expanded, setExpanded] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [navBackground, setNavBackground] = useState("transparent");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
-  const [authType, setAuthType] = useState("login");
-
-  // 🔥 NEW STATES
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [showNavbar, setShowNavbar] = useState(true);
+  const [authType, setAuthType] = useState("login"); // 👈 keep this
 
   const location = useLocation();
 
@@ -27,36 +21,20 @@ function WaveyvigTechNavbar() {
     setIsLoggedIn(!!token);
   }, [location]);
 
-  // 🔥 ADVANCED SCROLL EFFECT
+  // Scroll effect
+  const handleScroll = () => {
+    setNavBackground(window.scrollY > 50 ? "#1e3a8a" : "transparent");
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // Background + shrink
-      const isScroll = currentScrollY > 50;
-      setScrolled(isScroll);
-      setNavBackground(isScroll ? "#1e3a8a" : "transparent");
-
-      // Hide / Show navbar
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        setShowNavbar(false); // scrolling down
-      } else {
-        setShowNavbar(true); // scrolling up
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
     window.addEventListener("scroll", handleScroll);
 
-    // For non-home pages
     if (location.pathname !== "/home") {
       setNavBackground("#1e3a8a");
-      setScrolled(true);
     }
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, location]);
+  }, [location]);
 
   // Logout
   const handleLogout = () => {
@@ -71,12 +49,9 @@ function WaveyvigTechNavbar() {
         variant="dark"
         fixed="top"
         expanded={expanded}
-        className={`custom-navbar 
-          ${scrolled ? "scrolled" : ""} 
-          ${showNavbar ? "show-nav" : "hide-nav"}
-        `}
         style={{
           backgroundColor: navBackground,
+          transition: "0.4s",
         }}
       >
         <Container>
@@ -87,55 +62,24 @@ function WaveyvigTechNavbar() {
           <Navbar.Toggle onClick={() => setExpanded(!expanded)} />
 
           <Navbar.Collapse>
-            <Nav className="ms-auto gap-2 align-items-center">
-
-              {/* HOME */}
-              <Nav.Link
-                as={Link}
-                to="/home"
-                onClick={handleClose}
-                className={location.pathname === "/home" ? "active-link" : ""}
-              >
+            <Nav className="ms-auto gap-2">
+              <Nav.Link as={Link} to="/home" onClick={handleClose}>
                 Home
               </Nav.Link>
 
-              {/* SERVICES */}
-              <Nav.Link
-                as={Link}
-                to="/services"
-                onClick={handleClose}
-                className={location.pathname === "/services" ? "active-link" : ""}
-              >
+              <Nav.Link as={Link} to="/services" onClick={handleClose}>
                 Services
               </Nav.Link>
 
-              {/* TRAINING */}
-              <Nav.Link
-                as={Link}
-                to="/training"
-                onClick={handleClose}
-                className={location.pathname === "/training" ? "active-link" : ""}
-              >
+              <Nav.Link as={Link} to="/training" onClick={handleClose}>
                 Training
               </Nav.Link>
 
-              {/* CAREERS */}
-              <Nav.Link
-                as={Link}
-                to="/careers"
-                onClick={handleClose}
-                className={location.pathname === "/careers" ? "active-link" : ""}
-              >
+              <Nav.Link as={Link} to="/careers" onClick={handleClose}>
                 Careers
               </Nav.Link>
 
-              {/* ABOUT */}
-              <Nav.Link
-                as={Link}
-                to="/about"
-                onClick={handleClose}
-                className={location.pathname === "/about" ? "active-link" : ""}
-              >
+              <Nav.Link as={Link} to="/about" onClick={handleClose}>
                 About
               </Nav.Link>
 
@@ -147,12 +91,11 @@ function WaveyvigTechNavbar() {
                 href="https://wa.me/918248429488"
                 target="_blank"
                 variant="success"
-                className="whatsapp-btn"
               >
                 WhatsApp
               </Button>
 
-              {/* AUTH */}
+              {/* 🔥 AUTH */}
               {!isLoggedIn ? (
                 <NavDropdown title="Account">
                   <NavDropdown.Item
@@ -193,11 +136,11 @@ function WaveyvigTechNavbar() {
         </Container>
       </Navbar>
 
-      {/* AUTH MODAL */}
+      {/* ✅ FIXED MODAL CALL */}
       {showAuth && (
         <AuthModal
           type={authType}
-          onClose={() => setShowAuth(false)}
+          onClose={() => setShowAuth(false)} // ✅ MUST BE FUNCTION
         />
       )}
     </>

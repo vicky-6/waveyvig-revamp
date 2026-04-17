@@ -10,6 +10,7 @@ Front End:
 8. npm install react-toastify
 9. npm install framer-motion
 10. npm instll react-parallax-tilt
+11. npm install react-scroll-parallax
 
 
 Back End: 
@@ -19,3 +20,9 @@ Back End:
 4. npm install bcryptjs
 5. npm install axios
 6. npm install multer
+
+git:
+1. git add .
+2. git commit -m "Updated solution UI animations"
+3. git push
+4. 

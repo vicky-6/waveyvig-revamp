@@ -1,0 +1,38 @@
+.loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0a0a23;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader-text {
+  color: #00e5ff;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  animation: fade 1.5s infinite alternate;
+}
+
+.loader-bar {
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(90deg, #00e5ff, #2196f3);
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes fade {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}

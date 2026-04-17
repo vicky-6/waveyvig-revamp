@@ -8,12 +8,18 @@ import ChatBot from "./components/Chatbot";
 import AppRoutes from "./routes/AppRoutes";
 
 import { ToastContainer } from "react-toastify";
+import ScrollToTop from "./components/ScrollTop";
+import CursorGlow from "./components/CursorGlow";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 function App() {
   return (
-    <>
+    <ParallaxProvider>
       {/* ✅ Always show Navbar */}
       <WaveyvigTechNavbar />
+      <CursorGlow />
+
+      <ScrollToTop />
 
       {/* ✅ Routes */}
       <AppRoutes />
@@ -25,7 +31,7 @@ function App() {
       <Footer />
       <WhatsAppButton />
       <ChatBot />
-    </>
+    </ParallaxProvider>
   );
 }
 

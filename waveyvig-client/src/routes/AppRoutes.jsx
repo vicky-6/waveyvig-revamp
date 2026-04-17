@@ -1,4 +1,7 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import PageLoader from "../components/PageLoader";
 
 import About from "../pages/About/About";
 import CareersMain from "../pages/Careers/CareersMain";
@@ -16,40 +19,53 @@ import Dashboard from "../pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 
 function AppRoutes() {
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 400);
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/home" replace />} />
+    <>
+      {loading && <PageLoader />}
+      <AnimatePresence mode="wait">
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" replace />} />
 
-      {/* PUBLIC ROUTES */}
-      <Route path="/home" element={<HomeMain />} />
-      <Route path="/careers" element={<CareersMain />} />
-      <Route path="/training" element={<TrainingMain />} />
-      <Route path="/services" element={<Servicesmain />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/fullstack-course" element={<Fullstack />} />
+          {/* PUBLIC ROUTES */}
+          <Route path="/home" element={<HomeMain />} />
+          <Route path="/careers" element={<CareersMain />} />
+          <Route path="/training" element={<TrainingMain />} />
+          <Route path="/services" element={<Servicesmain />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/fullstack-course" element={<Fullstack />} />
 
-      {/* 🔐 PROTECTED ROUTES */}
-      <Route
-        path="/profile"
-        element={
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        }
-      />
+          {/* 🔐 PROTECTED ROUTES */}
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
 
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
 
-      {/* 404 */}
-      <Route path="*" element={<h2>Page Not Found</h2>} />
-    </Routes>
+          {/* 404 */}
+          <Route path="*" element={<h2>Page Not Found</h2>} />
+        </Routes>
+      </AnimatePresence>
+    </>
   );
 }
 
